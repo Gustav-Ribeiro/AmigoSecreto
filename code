@@ -1,0 +1,42 @@
+let amigos = [];
+
+function adicionarAmigo(){
+    let amigo = document.getElementById('amigo');
+    let lista = document.getElementById('listaAmigos');
+    amigos.push(amigo.value);
+    if (lista.textContent == ''){
+        lista.textContent = amigo.value;
+    } else {
+        lista.textContent = lista.textContent + ',' + amigo.value;
+    }
+    amigo.value = '';
+}
+
+function embaralha(lista) {
+
+    for (let indice = lista.length; indice; indice--) {
+
+        const indiceAleatorio = Math.floor(Math.random() * indice);
+
+        // atribuição via destructuring
+        [lista[indice - 1], lista[indiceAleatorio]] = 
+            [lista[indiceAleatorio], lista[indice - 1]];
+    }
+}
+
+function sortearAmigo(){
+    embaralha(amigos);
+    let result = document.getElementById('resultado');
+
+    if (amigos.length === 0) {
+        result.innerHTML = 'Adicione amigos antes de sortear!';
+        return;
+    }
+
+    const indiceSorteado = Math.floor(Math.random() * amigos.length);
+    const amigoSorteado = amigos[indiceSorteado];
+
+    result.innerHTML = 'Seu amigo secreto é: ' + amigoSorteado;
+}
+
+
